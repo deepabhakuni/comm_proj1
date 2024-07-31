@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Page</title>
+    <link href="./common.css" rel="stylesheet">
+    <script src="./checkLogin.js"></script>
+</head>
+
+<body>
+    <div id="notloggedin" class="center hideblock padding20">You need to login first! Click <a href="./welcome.html">here</a> to go to the welcome page.</div>
+    <div id="showcontent" class="center hideblock">
+    <h1>Login Successful</h1>
+    <span>Welcome! </span>
+    <script>
+    let loginUser = localStorage.getItem("loginUser") ? JSON.parse(localStorage.getItem("loginUser")) : [];
+    document.write(loginUser.email);
+    </script>
+    <span><br /><br />Click <a href="./userManagement.html">here</a> to manage users.</span>
+</div>
+</body>
+
+</html>

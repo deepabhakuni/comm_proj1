@@ -1,0 +1,115 @@
+.center { 
+    text-align: center;
+}
+.padding20 {
+    padding: 20px;
+}
+.dark {
+    font-weight: bold;
+}
+.alignleft {
+    text-align: left;
+}
+.alignright {
+    text-align: right;
+}
+.hideblock {
+  display: none;
+}
+.float-right {
+  float: right;
+}
+.float-left {
+  float: left;
+}
+.d-block {
+  border: 1px solid;
+}
+.bgcolor-light {
+  background-color: lightblue;
+}
+.bgcolor-blue {
+  background-color: blue;
+}
+.curvybox {
+    width: 150px;
+    height: 50px;
+    border: 2px solid;
+    margin: 10px 20px;
+    border-radius: 40px / 40px;
+    padding: 10px 30px 10px 30px;
+  }
+  .btnaqua {
+    background-color: aqua;
+    width: 150px;
+    height: 50px;
+    border: 2px solid;
+    margin: 10px 20px;
+    border-radius: 40px / 40px;
+  }
+  input[type=text],
+  input[type=password] {
+    border: 1px solid;
+    border-radius: 5px;
+  }
+  span a {
+    text-decoration: none;
+    color: black;
+  }
+  span a:hover {
+    text-decoration: none;
+  }
+  span a:active {
+    text-decoration: none;
+  }
+.container {
+    width: 50%;
+}
+.paddingright {
+    padding-right: 20px;
+}
+.paddingleft {
+    padding-left: 20px;
+}
+.nav {
+    list-style: none inside;
+    margin: 0;
+    padding: 0;
+  }
+.nav li {
+    display: block;
+    position: relative;
+    background-color: lightgray;
+    border: 1px black solid;
+    text-align: center;
+  }
+.nav li a {
+    display: block;
+    padding: 0;
+    text-decoration: none;
+    line-height: 35px;
+    color: black;
+  }
+ul li a:active {
+    background-color: white;
+}
+
+#chatContainer {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  min-height: 400px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+#messageInput {
+  width: 90%;
+  margin-top: 10px;
+  padding: 5px;
+}
+
+@media (min-width: 300px) and (max-width: 767px) {
+    .container {
+        width: 100%;
+    }
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users</title>
+  <link href="./common.css" rel="stylesheet">
+  <script src="./checkLogin.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div id="notloggedin" class="center hideblock padding20">You need to login first! Click <a href="./welcome.html">here</a> to go to the welcome page.</div>
+  <div id="showcontent" class="hideblock">
+  <ul class="nav">
+    <li class="col-lg-3">
+      <a href="groupChat.html">Group Chat</a>
+    </li>
+    <li class="col-lg-3">
+      <a href="userManagement.html" class="active">Manage Users</a>
+    </li>
+    <li class="col-lg-3">
+      <a href="manageDocs.html">Manage Documents</a>
+    </li>
+    <li class="col-lg-3">
+      <a href="./logout.html">Logout</a>
+    </li>
+  </ul>
+  <h1>Users</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">User Email id</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <script>
+        let allusers = JSON.parse(localStorage.getItem("users"));
+        let loggedinuser = JSON.parse(localStorage.getItem("loginUser"));
+        var htmlContent = "";
+        for (var i = 0; i < allusers.length; i++) {
+          htmlContent += '<tr id = "' + allusers[i].id + '"><td>' + allusers[i].fullname + '</td><td>' + allusers[i].email + '</td><td>';
+          htmlContent += '<a href="./editUser.html?id=' + allusers[i].id + '">Edit</a>';
+          if (loggedinuser[0].id == allusers[i].id) {
+            htmlContent += '</tr>';
+          } else {
+            htmlContent += ' | <a data-delete-link="' + allusers[i].id + '" class="deletebtn" data-toggle="modal" data-target=".deletionmodal"> Delete </a></td></tr>';
+          }
+        }
+        document.write(htmlContent);
+      </script>
+
+    </tbody>
+  </table>
+  <!-- Modal -->
+  <div class="modal fade deletionmodal" tabindex="-1" aria-hidden="true">
+    <form id="delete-form">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Confirm User Deletion</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img src="./Help.png" alt="question" /> Are you sure?
+          </div>
+          <div class="modal-footer">
+            <button type="submit" id="submitbtn" class="btn btn-outline-primary">Ok</button>
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+<script>
+  let users = JSON.parse(localStorage.getItem("users"));
+  $(document).on('click', '.deletebtn', function () {
+    $('#delete-form').data('id', $(this).data('delete-link'));
+  });
+
+  let confirmDeleteButton = document.getElementById('submitbtn');
+  confirmDeleteButton.addEventListener('click', function () {
+    const userid = $('#delete-form').data('id');
+    let userIndex = users.findIndex(result => result.id == userid);
+    users.splice(userIndex, 1);
+    $('tr#' + userid + '').remove();
+    localStorage.setItem("users", JSON.stringify(users));
+
+    $('.deletionmodal').modal('hide');
+  });
+</script>
+
+</html>
